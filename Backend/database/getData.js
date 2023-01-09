@@ -54,7 +54,7 @@ const getDepartmentById = (dept_Id)=>{
     });
 }
 
-const getEmpStatusById = (status_Id)=>{
+const getemployee_statusById = (status_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = "select * from empstatus where id = ?;";
@@ -72,7 +72,7 @@ const getEmpStatusById = (status_Id)=>{
     });
 }
 
-const getEmpTypeById = (type_Id)=>{
+const getemployee_typeById = (type_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = "select * from emptype where id = ?;";
@@ -90,7 +90,7 @@ const getEmpTypeById = (type_Id)=>{
     });
 }
 
-const getMaritalStatusById = (status_Id)=>{
+const getmarital_statusById = (status_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = "select * from maritalstatus where id = ?;";
@@ -185,9 +185,9 @@ module.exports = {
     getAllPaygrades,
     getJobTitles,
     getDepartmentById,
-    getEmpStatusById,
-    getEmpTypeById,
-    getMaritalStatusById,
+    getemployee_statusById,
+    getemployee_typeById,
+    getmarital_statusById,
     getPayGradeById,
     getEmployeeId,
     getUserIDByEmpId,

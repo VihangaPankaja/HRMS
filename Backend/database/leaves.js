@@ -1,6 +1,6 @@
 const DB = require('./DB_helper');
 
-const getLeavesBySupId = (sup_Id)=>{
+const get_LeavesBySupId = (sup_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select 
@@ -31,7 +31,7 @@ const getLeavesBySupId = (sup_Id)=>{
     });
 }
 
-const getLeavesByEmpId = (emp_Id)=>{
+const get_leavesByEmpId = (emp_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select 
@@ -63,7 +63,7 @@ const getLeavesByEmpId = (emp_Id)=>{
     });
 }
 
-const getLeavesData = (leave_Id)=>{
+const get_LeavesData = (leave_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select 
@@ -115,7 +115,7 @@ const getSupervisor = (leave_Id)=>{
     });
 }
 
-const getLeaveStatus = (leave_Id)=>{
+const get_leavestatus = (leave_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select leavestatus.status 
@@ -221,11 +221,11 @@ const reviewRequest = (leave_Id, stat)=>{
 }
 
 module.exports = {
-    getLeavesBySupId,
-    getLeavesByEmpId,
-    getLeavesData,
+    get_LeavesBySupId,
+    get_leavesByEmpId,
+    get_LeavesData,
     getSupervisor,
-    getLeaveStatus,
+    get_leavestatus,
     setAcceptLeave,
     setRejectLeave,
     submitLeave,

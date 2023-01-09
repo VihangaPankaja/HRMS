@@ -18,7 +18,7 @@ const updatePaygrade = (Data)=>{
     });
 }
 
-const addJobTitle = (Data)=>{
+const add_job_title = (Data)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = "insert into emptype (type) value (?);";
@@ -38,5 +38,5 @@ const addJobTitle = (Data)=>{
 
 module.exports = {
     updatePaygrade,
-    addJobTitle
+    add_job_title
 }

@@ -28,7 +28,7 @@ const getUserDataByDepartment = (dept) => {
     });
 }
 
-const getLeavesByDepartment = (Date_from, Date_to) => {
+const get_leavesByDepartment = (Date_from, Date_to) => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select department, count(id) as total_leaves 
@@ -86,7 +86,7 @@ const getAverageSalaryByDepartment = () => {
     });
 }
 
-const getCurrentUserName = (Id) => {
+const get_current_username = (Id) => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = "select firstname, lastname from employee where user_Id = ?;";
@@ -124,7 +124,7 @@ const getEmployeesAndSupervisors = () => {
     });
 }
 
-const getGroupEmployeesReportParameters = () => {
+const get_grp_emps_rprt_prmtrs = () => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select COLUMN_NAME 
@@ -144,7 +144,7 @@ const getGroupEmployeesReportParameters = () => {
     });
 }
 
-const getEmployeeAndSupervisorParameterList = () => {
+const getEmployeeAndSupervisorparameter_list = () => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select COLUMN_NAME 
@@ -164,7 +164,7 @@ const getEmployeeAndSupervisorParameterList = () => {
     });
 }
 
-const getDepartmentList = () => {
+const get_dpt_list = () => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = "select Name from department;";
@@ -182,7 +182,7 @@ const getDepartmentList = () => {
     });
 }
 
-const getParameterList = () => {
+const getparameter_list = () => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select COLUMN_NAME 
@@ -204,13 +204,13 @@ const getParameterList = () => {
 
 module.exports = {
     getUserDataByDepartment,
-    getLeavesByDepartment,
+    get_leavesByDepartment,
     getEmployeeCountByGrouping,
     getAverageSalaryByDepartment,
-    getCurrentUserName,
+    get_current_username,
     getEmployeesAndSupervisors,
-    getGroupEmployeesReportParameters,
-    getEmployeeAndSupervisorParameterList,
-    getDepartmentList,
-    getParameterList
+    get_grp_emps_rprt_prmtrs,
+    getEmployeeAndSupervisorparameter_list,
+    get_dpt_list,
+    getparameter_list
 }
