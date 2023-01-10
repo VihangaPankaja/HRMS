@@ -15,4 +15,7 @@ Router.get('/getHRM', auth.authRequire, adminController.getHRMInfo);
 
 Router.get("/getHRMDetails", auth.authRequire, adminController.getHRMDetails);
 
+//Delete HR Manager
+Router.get("/deketeHR", auth.authRequire, adminController.deleteHR);
+
 module.exports = Router;

@@ -248,9 +248,14 @@ const getHRMDetails = async (req,res) => {
     });
 }
 
+const deleteHR = async (req,res) =>{
+
+}
+
 module.exports = {
     theAdminLogin,
     addHRManagerDetails,
     getHRMInfo,
-    getHRMDetails
+    getHRMDetails,
+    deleteHR
 }
