@@ -81,7 +81,7 @@ const createToken = async (user) => {
             username: user.username,
             userId: user.id,
             role: user.type,
-            paygrade: user.paygrade,
+            pay_grade: user.pay_grade,
         },
         process.env.JWT_ENV,
         {

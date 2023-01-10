@@ -23,10 +23,10 @@ const verify_token = (req, res, next) => {
 };
 
 
-const has_paygrade = (paygrades) => {
+const has_pay_grade = (pay_grades) => {
   return (req, res, next) => {
-    const userGrade = req.user.paygrade;
-    if (paygrades.includes(userGrade)){
+    const userGrade = req.user.pay_grade;
+    if (pay_grades.includes(userGrade)){
       next();
     } else {
       return res.status(403).send("Incorrect user type. Not authenticationorized.");
@@ -36,5 +36,5 @@ const has_paygrade = (paygrades) => {
 
 module.exports = {
   verify_token,
-  has_paygrade
+  has_pay_grade
 }

@@ -12,7 +12,7 @@ const employee_signup = (req) => {
     const password2 = req.body.password2;
     const line1 = req.body.Line1;
     const line2 = req.body.Line2;
-    const city = req.body.City;
+    const Town = req.body.Town;
     const district = req.body.District;
     const postal_code = req.body.Postal_Code;
     const emg_name = req.body.Name;
@@ -24,8 +24,8 @@ const employee_signup = (req) => {
     const email = req.body.email;
     const joined_date = req.body.Joined_date;
     const nic_number = req.body.nic_number;
-    const phone_number1 = req.body.phonenumber1;
-    const phone_number2 = req.body.phonenumber2;
+    const phone_number1 = req.body.phon_num1;
+    const phone_number2 = req.body.phon_num2;
 
     if (
       validator.isEmpty(username) ||
@@ -33,7 +33,7 @@ const employee_signup = (req) => {
       validator.isEmpty(password2) ||
       validator.isEmpty(line1) ||
       validator.isEmpty(line2)||
-      validator.isEmpty(city) ||
+      validator.isEmpty(Town) ||
       validator.isEmpty(district) ||
       validator.isEmpty(postal_code) ||
       validator.isEmpty(emg_name) ||
@@ -125,7 +125,7 @@ const employee_update = (req) => {
   try {
     const line1 = req.body.line1;
     const line2 = req.body.line2;
-    const city = req.body.city;
+    const Town = req.body.Town;
     const district = req.body.district;
     const postal_code = req.body.postal_code;
     const emg_name = req.body.name;
@@ -143,7 +143,7 @@ const employee_update = (req) => {
     if (
       validator.isEmpty(line1) ||
       validator.isEmpty(line2)||
-      validator.isEmpty(city) ||
+      validator.isEmpty(Town) ||
       validator.isEmpty(district) ||
       validator.isEmpty(postal_code) ||
       validator.isEmpty(emg_name) ||

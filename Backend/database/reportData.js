@@ -10,8 +10,8 @@ const getUserDataByDepartment = (dept) => {
                     \`Joined Date\`, 
                     \`Employee Type\`, 
                     \`Employee Status\`,
-                     Paygrade 
-                from employee_by_department 
+                     pay_grade 
+                from emp_by_department 
                 where Department = ? 
                 order by ID;`;
           
@@ -71,7 +71,7 @@ const getEmployeeCountByGrouping = (parm) => {
 const getAverageSalaryByDepartment = () => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from `average_salary_by_department`;";
+        sql_query = "select * from `avg_sal_by_department`;";
          
         DB.query(sql_query,  
             function (err, _results) {
@@ -108,8 +108,8 @@ const getEmployeesAndSupervisors = () => {
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
         sql_query = `select * 
-                from \`employee_and_supervisor\` 
-                order by \`employee_and_supervisor\`.\`Employee ID\`;`;
+                from \`employee_supervisor\` 
+                order by \`employee_supervisor\`.\`Employee ID\`;`;
           
         DB.query(sql_query,  
             function (err, _results) {
@@ -149,7 +149,7 @@ const getEmployeeAndSupervisorparameter_list = () => {
         result = {values: [], status: true}; 
         sql_query = `select COLUMN_NAME 
                 from information_schema.columns 
-                where table_name = 'employee_and_supervisor';`;
+                where table_name = 'employee_supervisor';`;
           
         DB.query(sql_query,  
             function (err, _results) {
@@ -187,7 +187,7 @@ const getparameter_list = () => {
         result = {values: [], status: true}; 
         sql_query = `select COLUMN_NAME 
                 from information_schema.columns 
-                where table_name = 'employee_by_department' and COLUMN_NAME != 'department';`;
+                where table_name = 'emp_by_department' and COLUMN_NAME != 'department';`;
         
         DB.query(sql_query,  
             function (err, _results) {

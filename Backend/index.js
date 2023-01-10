@@ -8,7 +8,7 @@ const managerRoutes = require('./routes/managerRoutes');
 const supervisorRoutes = require('./routes/supervisorRoutes');
 const userRoutes = require('./routes/userRoutes');
 const reportRoutes = require('./routes/reportRoutes');
-const {verify_token, has_paygrade}  = require("./middleware/authentication");
+const {verify_token, has_pay_grade}  = require("./middleware/authentication");
 
 const app = express();
 
@@ -18,19 +18,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const port = process.env.PORT || 3001;
 
-app.use('/hr', verify_token, has_paygrade(['level 4']), hrRoutes);
+app.use('/hr', verify_token, has_pay_grade(['level 4']), hrRoutes);
 app.use('/manager', verify_token, managerRoutes);
-app.use('/supervisor', verify_token, has_paygrade(['level 2']), supervisorRoutes);
+app.use('/supervisor', verify_token, has_pay_grade(['level 2']), supervisorRoutes);
 app.use('/user', userRoutes);
-app.use('/report', verify_token, has_paygrade(['level 3']), reportRoutes)
+app.use('/report', verify_token, has_pay_grade(['level 3']), reportRoutes)
 //restart1
 app.listen(port, () => {
 console.log(`Listening on port ${port}`)
 });
 
-app.get("/getleavetypes",(req,res)=>{
+app.get("/getleave_types",(req,res)=>{
     var selectDetails=[];
-    const sqlinsert = "SELECT ID, type FROM leavetype";
+    const sqlinsert = "SELECT ID, type FROM leave_type";
     db.query(sqlinsert,(err,result) => {
         if(err){
             console.log("table error", err);
@@ -62,7 +62,7 @@ app.get("/getHRMSdetails",(req,res)=>{
                             console.log("table error", err);
                         }else{
                             selectDetails.push(result);
-                            const sqlinsert = "SELECT ID as id,paygrade as name FROM paygrade";
+                            const sqlinsert = "SELECT ID as id,pay_grade as name FROM pay_grade";
                             db.query(sqlinsert,(err,result) => {
                                 if(err){
                                     console.log("table error", err);

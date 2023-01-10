@@ -4,13 +4,13 @@ const getData = require('../database/getData');
 const validator = require("../validation/validation");
 const setData = require("../database/setData");
 
-const get_paygrades = async (req,res)=>{
-    const paygrades = await getData.getAllPaygrades();
-    if (paygrades.status){
-        return res.status(200).json(paygrades.values);
+const get_pay_grades = async (req,res)=>{
+    const pay_grades = await getData.getAllpay_grades();
+    if (pay_grades.status){
+        return res.status(200).json(pay_grades.values);
     } else {
         return res.status(200).json({
-            message: "Cannot get paygrade details"
+            message: "Cannot get pay_grade details"
         })
     }
 }
@@ -29,7 +29,7 @@ const assign_supervisor  = async (req,re)=>{
             if(err){
                 console.log(err)
             }else{
-                const sql_insert_new_supervisor = "UPDATE employee SET paygrade=2 WHERE id = ?";
+                const sql_insert_new_supervisor = "UPDATE employee SET pay_grade=2 WHERE id = ?";
                 db.query(sql_insert_new_supervisor,[supervisor_id],(err,result) => {
                     if(err){
                         console.log(err)
@@ -92,9 +92,9 @@ const register_an_employee = async (req,res)=>{
     }
 
     if (employee_type.values[0].type == "Manager"){
-        req.body.paygrade = 3;
+        req.body.pay_grade = 3;
     } else {
-        req.body.paygrade = 1;
+        req.body.pay_grade = 1;
     }
 
     employee_status = await getData.getemployee_statusById(req.body.employee_status);
@@ -137,17 +137,17 @@ const add_job_title = async (req,res)=>{
     }
 }
 
-const edit_paygrade = async (req,res)=>{
+const edit_pay_grade = async (req,res)=>{
     
-    const update_status= await setData.updatePaygrade(req.body);
+    const update_status= await setData.updatepay_grade(req.body);
 
     if (update_status.status === true){
         return res.status(201).json({
-            message: "Paygrade updated successfully."
+            message: "pay_grade updated successfully."
         });
     }else{
         return res.status(400).json({
-            message: "Updating paygrade failed."
+            message: "Updating pay_grade failed."
         });
     }
 }
@@ -167,8 +167,8 @@ const get_job_title= async (req, res)=>{
 module.exports = {
     register_an_employee,
     assign_supervisor ,
-    get_paygrades,
-    edit_paygrade,
+    get_pay_grades,
+    edit_pay_grade,
     get_job_title,
     add_job_title
 }

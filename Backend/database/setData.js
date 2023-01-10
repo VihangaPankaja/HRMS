@@ -1,9 +1,9 @@
 const DB = require('./DB_helper');
 
-const updatePaygrade = (Data)=>{
+const updatepay_grade = (Data)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "update paygrade set salary=?, num_leaves=? where id = ?;";
+        sql_query = "update pay_grade set salary=?, num_leaves=? where id = ?;";
         
         DB.query(sql_query, [Data.salary, Data.num_leaves, Data.ID],  
             function (err, _results) {
@@ -21,7 +21,7 @@ const updatePaygrade = (Data)=>{
 const add_job_title = (Data)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "insert into emptype (type) value (?);";
+        sql_query = "insert into employ_type (type) value (?);";
         
         DB.query(sql_query, [Data.title],  
             function (err, _results) {
@@ -37,6 +37,6 @@ const add_job_title = (Data)=>{
 }
 
 module.exports = {
-    updatePaygrade,
+    updatepay_grade,
     add_job_title
 }

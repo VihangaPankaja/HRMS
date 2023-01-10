@@ -6,13 +6,13 @@ const get_LeavesBySupId = (sup_Id)=>{
         sql_query = `select 
                     \`leave\`.id, 
                     \`leave\`.emp_ID, 
-                    leavestatus.status, 
+                    leaves_status.status, 
                     \`leave\`.Date, 
                     \`leave\`.reason, 
-                    leavetype.type 
+                    leave_type.type 
                 from \`leave\` join 
-                    leavetype join 
-                    leavestatus on \`leave\`.type_ID = leavetype.ID and \`leave\`.status = leavestatus.ID 
+                    leave_type join 
+                    leaves_status on \`leave\`.type_ID = leave_type.ID and \`leave\`.status = leaves_status.ID 
                 where emp_id in (
                     select employee.id emp_id 
                     from employee join supervisor on employee.id = supervisor.emp_id 
@@ -37,17 +37,17 @@ const get_leavesByEmpId = (emp_Id)=>{
         sql_query = `select 
                     \`employee\`.firstname, 
                     \`employee\`.lastname, 
-                    \`leavestatus\`.status, 
-                    \`leave\`.id, leavetype.type, 
+                    \`leaves_status\`.status, 
+                    \`leave\`.id, leave_type.type, 
                     \`leave\`.Date, 
                     \`leave\`.reason 
                 from 
                     \`employee\` join 
-                    \`leavestatus\` join 
-                    \`leave\` join leavetype on 
-                        \`leave\`.status = \`leavestatus\`.\`ID\` and 
+                    \`leaves_status\` join 
+                    \`leave\` join leave_type on 
+                        \`leave\`.status = \`leaves_status\`.\`ID\` and 
                         \`employee\`.id = \`leave\`.\`emp_ID\` and
-                        \`leave\`.type_ID = leavetype.ID 
+                        \`leave\`.type_ID = leave_type.ID 
                 where \`leave\`.emp_ID = ?;`;
        
         DB.query(sql_query, [emp_Id],  
@@ -69,17 +69,17 @@ const get_LeavesData = (leave_Id)=>{
         sql_query = `select 
                     \`employee\`.firstname, 
                     \`employee\`.lastname, 
-                    \`leavestatus\`.status, 
-                    \`leave\`.id, leavetype.type, 
+                    \`leaves_status\`.status, 
+                    \`leave\`.id, leave_type.type, 
                     \`leave\`.Date, 
                     \`leave\`.reason 
                 from 
                     \`employee\` join 
-                    \`leavestatus\` join 
-                    \`leave\` join leavetype on 
-                        \`leave\`.status = \`leavestatus\`.\`ID\` and 
+                    \`leaves_status\` join 
+                    \`leave\` join leave_type on 
+                        \`leave\`.status = \`leaves_status\`.\`ID\` and 
                         \`employee\`.id = \`leave\`.\`emp_ID\` and 
-                        \`leave\`.type_ID = leavetype.ID 
+                        \`leave\`.type_ID = leave_type.ID 
                 where \`leave\`.id = ?;`;
         
         DB.query(sql_query, [leave_Id],  
@@ -115,11 +115,11 @@ const getSupervisor = (leave_Id)=>{
     });
 }
 
-const get_leavestatus = (leave_Id)=>{
+const get_leaves_status = (leave_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = `select leavestatus.status 
-                from \`leave\` join leavestatus on \`leave\`.status = leavestatus.id 
+        sql_query = `select leaves_status.status 
+                from \`leave\` join leaves_status on \`leave\`.status = leaves_status.id 
                 where \`leave\`.id = ? ;`;
          
         DB.query(sql_query, [leave_Id],  
@@ -193,7 +193,7 @@ const submitLeave = (reqst, emp_Id)=>{
 const reviewRequest = (leave_Id, stat)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select id from leavestatus where status = ?";
+        sql_query = "select id from leaves_status where status = ?";
         
         DB.query(sql_query, [stat], 
             function (err, _results) {
@@ -225,7 +225,7 @@ module.exports = {
     get_leavesByEmpId,
     get_LeavesData,
     getSupervisor,
-    get_leavestatus,
+    get_leaves_status,
     setAcceptLeave,
     setRejectLeave,
     submitLeave,

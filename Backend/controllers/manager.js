@@ -98,11 +98,11 @@ const edit_user = async (req,res)=>{
 
     const supervisor = await users.isSupervisor(req.body.empId);
     if (employee_type.values[0].type == "Manager"){
-        req.body.paygrade = 3;
+        req.body.pay_grade = 3;
     } else if (supervisor) {
-        req.body.paygrade = 2;
+        req.body.pay_grade = 2;
     } else {
-        req.body.paygrade = 1;
+        req.body.pay_grade = 1;
     }
 
     employee_status = await getData.getemployee_statusById(req.body.employee_status_id);

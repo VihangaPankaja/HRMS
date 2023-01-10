@@ -27,7 +27,7 @@ exports.user_login = async (req, res) => {
                 username: user.username,
                 userId: user.id,
                 role: user.type,
-                paygrade: user.paygrade,
+                pay_grade: user.pay_grade,
             },
             process.env.ACCESS_TOKEN_KEY,
             {
@@ -35,7 +35,7 @@ exports.user_login = async (req, res) => {
             }
             );
             user.token = access_token
-            res.status(201).json({"username":user.username, "user_id":user.id, "paygrade":user.paygrade, "type":user.type, "token":user.token});
+            res.status(201).json({"username":user.username, "user_id":user.id, "pay_grade":user.pay_grade, "type":user.type, "token":user.token});
         } else {
             return res.status(400).json({
                 message: "Password does not match.",

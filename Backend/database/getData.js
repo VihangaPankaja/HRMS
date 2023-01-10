@@ -1,9 +1,9 @@
 const DB = require('./db_helper');
 
-const getAllPaygrades = ()=>{
+const getAllpay_grades = ()=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from paygrade;";
+        sql_query = "select * from pay_grade;";
          
         DB.query(sql_query, 
             function (err, _results) {
@@ -21,7 +21,7 @@ const getAllPaygrades = ()=>{
 const getJobTitles = ()=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from emptype;";
+        sql_query = "select * from employ_type;";
         
         DB.query(sql_query,
             function (err, _results) {
@@ -57,7 +57,7 @@ const getDepartmentById = (dept_Id)=>{
 const getemployee_statusById = (status_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from empstatus where id = ?;";
+        sql_query = "select * from emp_status where id = ?;";
         
         DB.query(sql_query, [status_Id], 
             function (err, _results) {
@@ -75,7 +75,7 @@ const getemployee_statusById = (status_Id)=>{
 const getemployee_typeById = (type_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from emptype where id = ?;";
+        sql_query = "select * from employ_type where id = ?;";
           
         DB.query(sql_query, [type_Id], 
             function (err, _results) {
@@ -93,7 +93,7 @@ const getemployee_typeById = (type_Id)=>{
 const getmarital_statusById = (status_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from maritalstatus where id = ?;";
+        sql_query = "select * from Marital_status where id = ?;";
         
         DB.query(sql_query, [status_Id], 
             function (err, _results) {
@@ -108,10 +108,10 @@ const getmarital_statusById = (status_Id)=>{
     });
 }
 
-const getPayGradeById = (grade_Id)=>{
+const getpay_gradeById = (grade_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select * from paygrade where id = ?;";
+        sql_query = "select * from pay_grade where id = ?;";
         
         DB.query(sql_query, [grade_Id], 
             function (err, _results) {
@@ -182,13 +182,13 @@ const getAvailableLeaveCount = (emp_id) => {
 
 
 module.exports = {
-    getAllPaygrades,
+    getAllpay_grades,
     getJobTitles,
     getDepartmentById,
     getemployee_statusById,
     getemployee_typeById,
     getmarital_statusById,
-    getPayGradeById,
+    getpay_gradeById,
     getEmployeeId,
     getUserIDByEmpId,
     getAvailableLeaveCount

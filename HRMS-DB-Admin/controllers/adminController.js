@@ -7,7 +7,7 @@ const theAdminLogin = async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    let sql1 = `SELECT * FROM Employee left outer join EmpType on Employee.type = EmpType.ID left outer join User on Employee.user_Id = User.ID WHERE EmpType.type = 'Admin' and user.username = ${con.escape(username)} LIMIT 1`
+    let sql1 = `SELECT * FROM Employee left outer join employ_type on Employee.type = employ_type.ID left outer join User on Employee.user_Id = User.ID WHERE employ_type.type = 'Admin' and user.username = ${con.escape(username)} LIMIT 1`
 
     console.log(sql1);
 
@@ -77,11 +77,11 @@ const addHRManagerDetails = async (req, res) => {
                 message: "Email, username or NIC already exists!"
             });
         }
-        let address_sql = 'insert into Address (Line1, Line2, City, District, Postal_Code) values (?);';
+        let address_sql = 'insert into Address (Line1, Line2, Town, District, Postal_Code) values (?);';
         let address_values = [
             data.Line1,
             data.Line2,
-            data.City,
+            data.Town,
             data.District,
             data.Postal_Code
         ];
@@ -89,7 +89,7 @@ const addHRManagerDetails = async (req, res) => {
         let user_sql = 'insert into User (username, password) values (?);';
         let user_values = [username, hashed_password];
 
-        let emerg_sql = 'insert into EmergencyContact (name, phone_number, Relationship) values (?)'
+        let emerg_sql = 'insert into emerg_contact (name, phone_number, Relationship) values (?)'
         let emerge_values = [
             data.Name,
             data.phone_number,
@@ -112,7 +112,7 @@ const addHRManagerDetails = async (req, res) => {
                 let user_id = result[1].insertId;
                 let emerge_id = result[2].insertId;
 
-                let emp_sql = 'insert into Employee (firstname, lastname, birthday, email, salary, Joined_date, nic_number, department, maritalStatus, address, type, paygrade, empStatus, user_id, emergency_contact) values (?)';
+                let emp_sql = 'insert into Employee (firstname, lastname, birthday, email, salary, Joined_date, nic_number, department, Marital_status, address, type, pay_grade, emp_status, user_id, emergency_contact) values (?)';
                 let emp_values = [
                     data.firstname, 
                     data.lastname, 
@@ -122,11 +122,11 @@ const addHRManagerDetails = async (req, res) => {
                     data.Joined_date, 
                     data.nic_number, 
                     data.department, 
-                    data.maritalStatus, 
+                    data.Marital_status, 
                     address_id, 
                     2, 
                     4, 
-                    data.empStatus, 
+                    data.emp_status, 
                     user_id, 
                     emerge_id
                 ];
@@ -143,11 +143,11 @@ const addHRManagerDetails = async (req, res) => {
 
                         let emp_id = result.insertId;
 
-                        let phone_sql = 'insert into PhoneNumber (emp_ID, phone_number) values ?';
+                        let phone_sql = 'insert into phon_num (emp_ID, phone_number) values ?';
                         let phone_values = [];
 
-                        phone_values.push([emp_id, req.body.phonenumber1]);
-                        phone_values.push([emp_id, req.body.phonenumber2]);
+                        phone_values.push([emp_id, req.body.phon_num1]);
+                        phone_values.push([emp_id, req.body.phon_num2]);
 
                         // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
@@ -210,25 +210,25 @@ const getHRMDetails = async (req,res) => {
             console.log("table error", err);
         }else{
             selectDetails.push(result);
-            const sqlinsert = "SELECT ID as id,status as name FROM maritalstatus";
+            const sqlinsert = "SELECT ID as id,status as name FROM Marital_status";
             con.query(sqlinsert,(err,result) => {
                 if(err){
                     console.log("table error", err);
                 }else{
                     selectDetails.push(result);
-                    const sqlinsert = "SELECT ID as id,type as name FROM emptype  where ID>2";
+                    const sqlinsert = "SELECT ID as id,type as name FROM employ_type  where ID>2";
                     con.query(sqlinsert,(err,result) => {
                         if(err){
                             console.log("table error", err);
                         }else{
                             selectDetails.push(result);
-                            const sqlinsert = "SELECT ID as id,paygrade as name FROM paygrade";
+                            const sqlinsert = "SELECT ID as id,pay_grade as name FROM pay_grade";
                             con.query(sqlinsert,(err,result) => {
                                 if(err){
                                     console.log("table error", err);
                                 }else{
                                     selectDetails.push(result);
-                                    const sqlinsert = "SELECT ID as id,status as name FROM empstatus";
+                                    const sqlinsert = "SELECT ID as id,status as name FROM emp_status";
                                     con.query(sqlinsert,(err,result) => {
                                         if(err){
                                             console.log("table error", err);

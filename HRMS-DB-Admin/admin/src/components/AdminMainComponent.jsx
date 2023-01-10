@@ -125,11 +125,11 @@ function AdminMain () {
                       <div className="form-row">
                           <div className="form-group col-6">
                           <label className="label" >phone_number1</label>
-                          <input type="text" className="form-control"  name="phonenumber1" id="phonenumber1" value={formValues.phonenumber1} onChange={handleChange} required/>
+                          <input type="text" className="form-control"  name="phon_num1" id="phon_num1" value={formValues.phon_num1} onChange={handleChange} required/>
                           </div>
                           <div className="form-group col-6">
                           <label className="label" >phone_number2</label>
-                          <input type="text" className="form-control"  name="phonenumber2" id="phonenumber2" value={formValues.phonenumber2} onChange={handleChange} required/>
+                          <input type="text" className="form-control"  name="phon_num2" id="phon_num2" value={formValues.phon_num2} onChange={handleChange} required/>
                           </div>
                       </div>
   
@@ -143,7 +143,7 @@ function AdminMain () {
   
                       <div className="form-group mb-3">
                       <label className="label" >Marital Status</label>
-                      <select className="form-control mb-3" name="maritalStatus" id="maritalStatus" value={formValues.maritalStatus} onChange={handleChange} >
+                      <select className="form-control mb-3" name="Marital_status" id="Marital_status" value={formValues.Marital_status} onChange={handleChange} >
                       <option >Open this select menu</option>
                       {MsSelect.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
                       </select>
@@ -151,7 +151,7 @@ function AdminMain () {
   
                       <div className="form-group mb-3">
                       <label className="label" >Employee status</label>
-                      <select className="form-control mb-3" name="empStatus" id="empStatus" value={formValues.empStatus} onChange={handleChange} >
+                      <select className="form-control mb-3" name="emp_status" id="emp_status" value={formValues.emp_status} onChange={handleChange} >
                       <option >Open this select menu</option>
                       {EsSelect.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
                       </select>
@@ -170,8 +170,8 @@ function AdminMain () {
                         <input type="text" className="form-control"  name="Line2" id="Line2" value={formValues.Line2} onChange={handleChange} required/>
                       </div>
                       <div className="form-group mb-3">
-                        <label className="label" >city</label>
-                        <input type="text" className="form-control"  name="City" id="City" value={formValues.City} onChange={handleChange}/>
+                        <label className="label" >Town</label>
+                        <input type="text" className="form-control"  name="Town" id="Town" value={formValues.Town} onChange={handleChange}/>
                       </div>
                       <div className="form-group mb-3">
                         <label className="label" >District</label>

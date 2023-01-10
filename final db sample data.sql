@@ -1,6 +1,6 @@
--- dumpy data to "emp_address" -- "address"
+-- dumpy data to "emp_address"
 
-INSERT INTO `emp_address` (`ID`, `Line1`, `Line2`, `City`, `District`, `Postal_Code`) VALUES
+INSERT INTO `address` (`ID`, `Line1`, `Line2`, `Town`, `District`, `Postal_Code`) VALUES
 (1, 'No. 102/151', 'St Ives Drive', 'Tecumseh', 'NH', '38946'),
 (2, 'No. 103/152', 'Highland Cove', 'Fisherville', 'SC', '28339'),
 (3, 'No. 104/153', 'Paragon Avenue', 'Hernshaw', 'PA', '29487'),
@@ -41,7 +41,7 @@ INSERT INTO `emp_address` (`ID`, `Line1`, `Line2`, `City`, `District`, `Postal_C
 (38, 'No. 139/188', 'Whitemarsh Street', 'Onawa', 'NY', '50078'),
 (39, 'No. 140/189', 'Woffington Lane', 'Orleans', 'NY', '43322'),
 (40, 'No. 141/190', 'Old Village Lane', 'Columbus', 'MD', '06365'),
-(41, 'No. 142/191', 'Mckusick Parkway', 'Kansas City', 'PA', '68634'),
+(41, 'No. 142/191', 'Mckusick Parkway', 'Kansas Town', 'PA', '68634'),
 (42, 'No. 143/192', 'Patchester Parkway', 'Rhinelander', 'WI', '77045'),
 (43, 'No. 144/193', 'Southchester Parkway', 'East Springfield', 'SD', '35952'),
 (44, 'No. 145/194', 'Ainsworth Lane', 'Cobalt', 'MA', '63047'),
@@ -66,7 +66,7 @@ INSERT INTO `department` (`ID`, `Name`, `Buillding`, `Floor`) VALUES
 --
 -- Dumping data for table `emerg_contact`
 --
-INSERT INTO `emergency_contact` (`ID`, `Name`, `phone_number`, `Relation_ship`) VALUES
+INSERT INTO `emerg_contact` (`ID`, `Name`, `phone_number`, `Relationship`) VALUES
 (1,'Joseph Bunch','0700900734','Sibling'),
 (2,'Judy Cooper','0700900012','Sister'),
 (3,'Jose Thompson','0700900128','Brother'),
@@ -119,10 +119,10 @@ INSERT INTO `emergency_contact` (`ID`, `Name`, `phone_number`, `Relation_ship`) 
 (50,'Juanita Loring','0700900150','Sister');
 
 --
--- Dumping data for table `empstatus`
+-- Dumping data for table `emp_status`
 --
 
-INSERT INTO `empstatus` (`ID`, `status`) VALUES
+INSERT INTO `emp_status` (`ID`, `status`) VALUES
 (1, 'intern-full-time'),
 (2, 'intern-part-time'),
 (3, 'contract-full-time'),
@@ -131,10 +131,10 @@ INSERT INTO `empstatus` (`ID`, `status`) VALUES
 (6, 'freelance');
 
 --
--- Dumping data for table `emp_type`
+-- Dumping data for table `employ_type`
 --
 
-INSERT INTO `emp_type` (`ID`, `type`) VALUES
+INSERT INTO `employ_type` (`ID`, `type`) VALUES
 (1, 'Admin'),
 (2, 'HR Manager'),
 (3, 'Accountant'),
@@ -147,10 +147,10 @@ INSERT INTO `emp_type` (`ID`, `type`) VALUES
 (10, 'Receptionist');
 
 -- --------------------------------------------------------
--- Dumping data for table `leavestatus`
+-- Dumping data for table `leaves_status`
 --
 
-INSERT INTO `leavestatus` (`ID`, `status`) VALUES
+INSERT INTO `leaves_status` (`ID`, `status`) VALUES
 (1, 'pending'),
 (2, 'approved'),
 (3, 'rejected');
@@ -166,10 +166,10 @@ INSERT INTO `leave_type` (`ID`, `type`) VALUES
 (4, 'No-pay'),
 (5, 'TBD');
 
--- Dumping data for table `marital_status`
+-- Dumping data for table `Marital_status`
 --
 
-INSERT INTO `marital_status` (`ID`, `status`) VALUES
+INSERT INTO `Marital_status` (`ID`, `status`) VALUES
 (1, 'married'),
 (2, 'unmarried');
 
@@ -183,7 +183,7 @@ INSERT INTO `pay_grade` (`ID`, `pay_grade`, `salary`, `num_leaves`) VALUES
 (4, 'level-4', '5500.00', 50);
 
 
-INSERT INTO `user_detail` (`ID`, `username`, `password`) VALUES
+INSERT INTO `user` (`ID`, `username`, `password`) VALUES
 (1,'emp1','$2b$10$3Sr3diZb7t7UkW9/cytYL.r9cskpNXqmDiqg.UerwXmoiLJdCRSCq'),
 (2,'emp2','$2b$10$3Sr3diZb7t7UkW9/cytYL.r9cskpNXqmDiqg.UerwXmoiLJdCRSCq'),
 (3,'emp3','$2b$10$3Sr3diZb7t7UkW9/cytYL.r9cskpNXqmDiqg.UerwXmoiLJdCRSCq'),
@@ -246,7 +246,7 @@ INSERT INTO `user_detail` (`ID`, `username`, `password`) VALUES
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`ID`, `firstname`, `lastname`, `birthday`, `email`, `salary`, `Joining_date`, `nic_number`, `photo`, `leave_count`, `department`, `marital_status`, `emp_address`, `type`, `pay_grade`, `empStatus`, `user_Id`, `emergency_contact`) VALUES
+INSERT INTO `employee` (`ID`, `firstname`, `lastname`, `birthday`, `email`, `salary`, `Joined_date`, `nic_number`, `photo`, `leave_count`, `department`, `Marital_status`, `address`, `type`, `pay_grade`, `emp_status`, `user_Id`, `emergency_contact`) VALUES
 (1,'Willie','Robinson', '1992-07-20', 'leola.jupyter@hrms.com', '266907.00', '2017-03-14', '942146937V', 0x30, 0, 5, 2, 1, 3, 1, 2, 1, 1),
 (2,'Ophelia','Fuller', '1989-02-04', 'greg.jupyter@hrms.com', '489399.00', '2013-04-14', '726942699V', 0x30, 0, 2, 1, 2, 3, 1, 6, 2, 2),
 (3,'Orlando','Sheridan', '2000-12-25', 'michael.jupyter@hrms.com', '659054.00', '2021-08-04', '781011134V', 0x30, 0, 5, 1, 2, 5, 1, 1, 3, 3),
@@ -300,7 +300,7 @@ INSERT INTO `employee` (`ID`, `firstname`, `lastname`, `birthday`, `email`, `sal
 
 
 
-INSERT INTO `phonenumber` (`ID`, `emp_ID`, `phone_number`) VALUES
+INSERT INTO `phon_num` (`ID`, `emp_ID`, `phone_number`) VALUES
 (1,'1','0700900318'),
 (2,'2','0700900315'),
 (3,'3','0700900094'),

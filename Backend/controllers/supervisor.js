@@ -30,7 +30,7 @@ const review_leave_rqsts = async (req,res)=>{
     }
     
     //is leave status TBD
-    const leave_status = await leaves.get_leavestatus(leave_id);
+    const leave_status = await leaves.get_leaves_status(leave_id);
     if (leave_status.values[0].status == "TBD"){
         return res.status(400).json({
             message: "This request has been already reviewed."

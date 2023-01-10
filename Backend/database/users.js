@@ -27,9 +27,9 @@ const registerUser = async (reqst)=>{
                     return;
                 }
                 user_Id = _result.insertId;
-                sql_query = "insert into address (Line1,Line2,City,District,Postal_Code) values (?,?,?,?,?)";
+                sql_query = "insert into address (Line1,Line2,Town,District,Postal_Code) values (?,?,?,?,?)";
             
-                DB.query(sql_query, [reqst.body.Line1, reqst.body.Line2, reqst.body.City, reqst.body.District, reqst.body.Postal_Code], (err, _result) => {
+                DB.query(sql_query, [reqst.body.Line1, reqst.body.Line2, reqst.body.Town, reqst.body.District, reqst.body.Postal_Code], (err, _result) => {
                         if(err){
                             result.status = false;
                             console.log("address error", err);
@@ -37,7 +37,7 @@ const registerUser = async (reqst)=>{
                             return;
                         }
                         address_Id = _result.insertId;
-                        sql_query = "insert into emergencycontact (Name,Phone_number,Relationship) values (?,?,?)";
+                        sql_query = "insert into emerg_contact (Name,Phone_number,Relationship) values (?,?,?)";
 
                         DB.query(sql_query, [reqst.body.Name, reqst.body.phone_number, reqst.body.Relationship], (err, _result) => {
                             if(err){
@@ -58,10 +58,10 @@ const registerUser = async (reqst)=>{
                                                 nic_number,
                                                 leave_count,
                                                 department,
-                                                maritalStatus,
+                                                Marital_status,
                                                 address,type,
-                                                paygrade,
-                                                empStatus,
+                                                pay_grade,
+                                                emp_status,
                                                 user_Id,
                                                 emergency_contact) 
                                             values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
@@ -78,11 +78,11 @@ const registerUser = async (reqst)=>{
                                     reqst.body.nic_number,
                                     leave_count,
                                     reqst.body.department,
-                                    reqst.body.maritalStatus,
+                                    reqst.body.Marital_status,
                                     address_Id,
                                     reqst.body.type,
-                                    reqst.body.paygrade,
-                                    reqst.body.empStatus,
+                                    reqst.body.pay_grade,
+                                    reqst.body.emp_status,
                                     user_Id,
                                     emergency_contact_Id
                                 ], (err, _result) => {
@@ -93,9 +93,9 @@ const registerUser = async (reqst)=>{
                                         return;
                                     }
                                     emp_Id = _result.insertId;
-                                    sql_query = "insert into phonenumber (emp_ID,phone_number) values (?,?)";
+                                    sql_query = "insert into phon_num (emp_ID,phone_number) values (?,?)";
 
-                                    DB.query(sql_query, [emp_Id, reqst.body.phonenumber1], (err, _result) => {
+                                    DB.query(sql_query, [emp_Id, reqst.body.phon_num1], (err, _result) => {
                                             if(err){
                                                 result.status = false;
                                                 console.log("phone number error", err);
@@ -144,24 +144,24 @@ const updateUser = (reqst)=>{
             console.error("transaction failed", err);
             return;
         }
-        sql_query = `update emergencycontact set Name = ?, Phone_number = ?, Relationship = ? where id = ?;`;
+        sql_query = `update emerg_contact set Name = ?, Phone_number = ?, Relationship = ? where id = ?;`;
 
         DB.query(sql_query, [nareqst.body.nameme, reqst.body.phone_number, reqst.body.relationship, reqst.body.emgcontact_id], (err, _result) => {
                     if(err){
                         result.status=false;
-                        console.log("emergencycontact update failed", err);
+                        console.log("emerg_contact update failed", err);
                         DB.rollback();
                         return;
                     }                                   
         });  
         
-        sql_query = `update address set Line1 = ?, Line2 = ?, City = ?, District = ?, Postal_Code = ? where id = ?;`;
+        sql_query = `update address set Line1 = ?, Line2 = ?, Town = ?, District = ?, Postal_Code = ? where id = ?;`;
 
         DB.query(sql_query,
             [
                 reqst.body.line1,
                 reqst.body.line2,
-                reqst.body.city,
+                reqst.body.Town,
                 reqst.body.district,
                 reqst.body.postal_code,
                 reqst.body.address_id
@@ -184,10 +184,10 @@ const updateUser = (reqst)=>{
                         Joined_date = ?, 
                         nic_number = ?,  
                         department = ?, 
-                        maritalStatus = ?, 
+                        Marital_status = ?, 
                         type = ?, 
-                        paygrade = ?, 
-                        empStatus = ?  
+                        pay_grade = ?, 
+                        emp_status = ?  
                     where id = ?`;
 
         DB.query(sql_query,
@@ -201,9 +201,9 @@ const updateUser = (reqst)=>{
                 reqst.body.nic_number,
                 reqst.body.dept_id,
                 reqst.body.marital_id,
-                reqst.body.emptype_id,
-                reqst.body.paygrade_id,
-                reqst.body.empstatus_id,
+                reqst.body.employ_type_id,
+                reqst.body.pay_grade_id,
+                reqst.body.emp_status_id,
                 reqst.body.empId
             ],(err, _result) => {
                 if(err){
@@ -214,7 +214,7 @@ const updateUser = (reqst)=>{
                 }
         }); 
 
-        sql_query = "update phonenumber set phone_number = ? where id = ?";
+        sql_query = "update phon_num set phone_number = ? where id = ?";
 
         DB.query(sql_query, [reqst.body.phone1, reqst.body.phone1_id], (err, _result) => {
                 if(err){
@@ -256,15 +256,15 @@ const getUserByUsername = (userName)=>{
                         \`user\`.id, 
                         \`user\`.username, 
                         \`user\`.password, 
-                        emptype.type, 
-                        paygrade.paygrade 
+                        employ_type.type, 
+                        pay_grade.pay_grade 
                     from 
                         \`user\` join 
                         employee join 
-                        emptype join 
-                        paygrade on \`user\`.id = employee.user_id and
-                            employee.paygrade = paygrade.id and 
-                            employee.type = emptype.id 
+                        employ_type join 
+                        pay_grade on \`user\`.id = employee.user_id and
+                            employee.pay_grade = pay_grade.id and 
+                            employee.type = employ_type.id 
                     where  username = ?;`;
         
         DB.query(sql_query, [userName], 
@@ -283,7 +283,7 @@ const getUserByUsername = (userName)=>{
 const getPhoneNoByEmpId = (emp_Id)=>{
     return new Promise((resolve, reject) => {
         result = {values: [], status: true}; 
-        sql_query = "select id, phone_number from phonenumber where emp_id = ?";
+        sql_query = "select id, phone_number from phon_num where emp_id = ?";
          
         DB.query(sql_query, [emp_Id] , 
             function (err, _results) {
@@ -332,36 +332,36 @@ const getEmployeeList = ()=>{
                         employee.photo,
                         employee.leave_count,
                         department.name dept_name,
-                        maritalstatus.status,
+                        Marital_status.status,
                         address.line1,
                         address.line2,
-                        address.city,
+                        address.Town,
                         address.district,
                         address.postal_code,
-                        emptype.type,
-                        paygrade.paygrade,
-                        empstatus.status,
-                        emergencycontact.name,
-                        emergencycontact.phone_number,
-                        emergencycontact.relationship 
+                        employ_type.type,
+                        pay_grade.pay_grade,
+                        emp_status.status,
+                        emerg_contact.name,
+                        emerg_contact.phone_number,
+                        emerg_contact.relationship 
                     from 
                         \`user\` join 
                         employee join 
                         department join 
-                        maritalstatus join 
+                        Marital_status join 
                         address join 
-                        emptype join 
-                        paygrade join 
-                        empstatus join 
-                        emergencycontact on 
+                        employ_type join 
+                        pay_grade join 
+                        emp_status join 
+                        emerg_contact on 
                             \`user\`.id = employee.user_id and 
                             department.id = employee.department and 
-                            maritalstatus.id = employee.maritalStatus and 
+                            Marital_status.id = employee.Marital_status and 
                             address.id = employee.address and 
-                            emptype.id = employee.type AND 
-                            paygrade.id = employee.paygrade and 
-                            empstatus.id = employee.empStatus and 
-                            emergencycontact.id = employee.emergency_contact;`;
+                            employ_type.id = employee.type AND 
+                            pay_grade.id = employee.pay_grade and 
+                            emp_status.id = employee.emp_status and 
+                            emerg_contact.id = employee.emergency_contact;`;
         
         DB.query(sql_query, 
             function (error, results) {
@@ -393,42 +393,42 @@ const getEmployee = (user_Id)=>{
                     employee.leave_count,
                     department.name dept_name,
                     department.id dept_id,
-                    maritalstatus.status mar_status,
-                    maritalstatus.id marital_id,
+                    Marital_status.status mar_status,
+                    Marital_status.id marital_id,
                     address.id address_id,
                     address.line1,
                     address.line2,
-                    address.city,
+                    address.Town,
                     address.district,
                     address.postal_code,
-                    emptype.type,
-                    emptype.id emptype_id,
-                    paygrade.paygrade,
-                    paygrade.id paygrade_id,
-                    empstatus.status,
-                    empstatus.id empstatus_id,
-                    emergencycontact.id emgcontact_id,
-                    emergencycontact.name,
-                    emergencycontact.phone_number,
-                    emergencycontact.relationship 
+                    employ_type.type,
+                    employ_type.id employ_type_id,
+                    pay_grade.pay_grade,
+                    pay_grade.id pay_grade_id,
+                    emp_status.status,
+                    emp_status.id emp_status_id,
+                    emerg_contact.id emgcontact_id,
+                    emerg_contact.name,
+                    emerg_contact.phone_number,
+                    emerg_contact.relationship 
                 from 
                     \`user\` join 
                     employee join 
                     department join 
-                    maritalstatus join 
+                    Marital_status join 
                     address join 
-                    emptype join 
-                    paygrade join 
-                    empstatus join 
-                    emergencycontact on 
+                    employ_type join 
+                    pay_grade join 
+                    emp_status join 
+                    emerg_contact on 
                         \`user\`.id = employee.user_id and 
                         department.id = employee.department and 
-                        maritalstatus.id = employee.maritalStatus and 
+                        Marital_status.id = employee.Marital_status and 
                         address.id = employee.address and 
-                        emptype.id = employee.type and 
-                        paygrade.id = employee.paygrade and 
-                        empstatus.id = employee.empStatus and 
-                        emergencycontact.id = employee.emergency_contact  
+                        employ_type.id = employee.type and 
+                        pay_grade.id = employee.pay_grade and 
+                        emp_status.id = employee.emp_status and 
+                        emerg_contact.id = employee.emergency_contact  
                 where \`user\`.id = ?;`;
          
         DB.query(sql_query, [parseInt(user_Id)], function (err, _results) {

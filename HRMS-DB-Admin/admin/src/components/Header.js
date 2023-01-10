@@ -3,7 +3,7 @@ import {Navbar, Container, Nav} from 'react-bootstrap';
 
 function Header() {
 
-    const level = sessionStorage.getItem("paygrade");
+    const level = sessionStorage.getItem("pay_grade");
     const [url, setURL] = useState(level);
 
     useEffect(() => {
